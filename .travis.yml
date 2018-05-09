@@ -9,10 +9,6 @@ matrix:
       dist: trusty
       sudo: required
       env: DEPLOY_FILE=notbit_linux32.tgz ARCH="x86"
-    - os: linux
-      dist: trusty
-      sudo: required
-      env: DEPLOY_FILE=notbit_win.zip ARCH="mxe"
     - os: osx
       osx_image: xcode7.2
       compiler: clang
@@ -66,8 +62,11 @@ script:
     make install;
   fi &&
   if [[ $ARCH == "mac" ]]; then
-    pkg-config libcrypto --cflags &&
-    pkg-config libcrypto --libs &&
+    cd /usr/local/lib/pkgconfig                     &&
+    sudo ln -s ln -s ../../Cellar/openssl/1.0.2o_1/lib/pkgconfig/libcrypto.pc &&
+    cd $TRAVIS_BUILD_DIR                            &&
+    pkg-config libcrypto --cflags                   &&
+    pkg-config libcrypto --libs                     &&
     ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist    &&
     make -j2                                        &&
     make install;
