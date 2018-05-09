@@ -64,7 +64,7 @@ script:
   fi &&
   if [[ $ARCH == "mac" ]]; then
     cd /usr/local/lib/pkgconfig                     &&
-    sudo ln -s ln -s ../../Cellar/openssl/1.0.2o_1/lib/pkgconfig/libcrypto.pc &&
+    sudo ln -s ../../Cellar/openssl/1.0.2o_1/lib/pkgconfig/libcrypto.pc &&
     cd $TRAVIS_BUILD_DIR                            &&
     pkg-config libcrypto --cflags                   &&
     pkg-config libcrypto --libs                     &&
