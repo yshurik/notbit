@@ -31,7 +31,7 @@ install:
     sudo apt-get install -y libssl-dev                          &&
     export                                                      ;
   fi &&
-  if [ $ARCH == "mac" ] || [ $ARCH == "macd" ]; then
+  if [[ $ARCH == "mac" ]]; then
     brew install openssl || echo -                              &&
     brew link --force openssl                                   &&
     export                                                      ;
@@ -56,20 +56,24 @@ script:
 - cd "$TRAVIS_BUILD_DIR"
 - |
   if [[ $ARCH == "x86" ]]; then
-    ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist &&
-    make -j2;
+    ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist    &&
+    make -j2                                        &&
+    make install;
   fi &&
   if [[ $ARCH == "x64" ]]; then
     ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist &&
-    make -j2;
+    make -j2                                        &&
+    make install;
   fi &&
-  if [ $ARCH == "mac" ] || [ $ARCH == "macd" ]; then
-    ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist &&
-    make -j2;
+  if [[ $ARCH == "mac" ]]; then
+    ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist    &&
+    make -j2                                        &&
+    make install;
   fi &&
   if [[ $ARCH == "mxe_skip_now" ]]; then
-    ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist &&
-    make -j2;
+    ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist    &&
+    make -j2                                        &&
+    make install;
   fi
 
 - ls -l dist/bin
