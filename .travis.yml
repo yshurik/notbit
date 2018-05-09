@@ -29,6 +29,7 @@ install:
   fi &&
   if [[ $ARCH == "mac" ]]; then
     brew install openssl || echo -                              &&
+    brew upgrade openssl || echo -                              &&
     brew link --force openssl                                   &&
     export                                                      ;
   fi &&
