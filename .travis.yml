@@ -66,6 +66,8 @@ script:
     make install;
   fi &&
   if [[ $ARCH == "mac" ]]; then
+    pkg-config libcrypto --cflags &&
+    pkg-config libcrypto --libs &&
     ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist    &&
     make -j2                                        &&
     make install;
@@ -77,3 +79,4 @@ script:
   fi
 
 - ls -l dist/bin
+- file dist/bin/notbit
