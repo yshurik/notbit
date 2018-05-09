@@ -16,7 +16,7 @@ matrix:
     - os: osx
       osx_image: xcode7.2
       compiler: clang
-      env: DEPLOY_FILE=notbit_mac.zip ARCH="macd"
+      env: DEPLOY_FILE=notbit_mac.zip ARCH="mac"
 
 install:
 - >
@@ -70,7 +70,7 @@ script:
     make -j2                                        &&
     make install;
   fi &&
-  if [[ $ARCH == "mxe_skip_now" ]]; then
+  if [[ $ARCH == "mxe" ]]; then
     ./autogen.sh --prefix=$TRAVIS_BUILD_DIR/dist    &&
     make -j2                                        &&
     make install;
